@@ -5,6 +5,8 @@ import com.zziri.logcut.service.ArgumentService;
 import com.zziri.logcut.service.BatchService;
 import com.zziri.logcut.service.PipelineService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -18,6 +20,7 @@ public class LogcutAppListener implements ApplicationListener<ContextRefreshedEv
     private final ArgumentService argumentService;
     private final PipelineService pipelineService;
     private final BatchService batchService;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -26,7 +29,7 @@ public class LogcutAppListener implements ApplicationListener<ContextRefreshedEv
             Queue<Job> pipeline = pipelineService.createPipeline(args);
             batchService.batch(pipeline);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error Occurred", e);
         }
     }
 }
