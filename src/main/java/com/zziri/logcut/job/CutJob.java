@@ -1,8 +1,11 @@
 package com.zziri.logcut.job;
 
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.regex.Pattern;
 
+@Component
 public class CutJob extends Job {
     @Override
     public int getNumberOfOptions() {
@@ -16,8 +19,8 @@ public class CutJob extends Job {
 
     @Override
     public List<String> run(List<String> lines) {
-        Pattern startPattern = Pattern.compile(lines.get(0));
-        Pattern endPattern = Pattern.compile(lines.get(1));
+        Pattern startPattern = Pattern.compile(options.get(0));
+        Pattern endPattern = Pattern.compile(options.get(1));
 
         int startIndex = getMatchIndex(lines, 0, startPattern);
         int endIndex = getMatchIndex(lines, startIndex+1, endPattern);
