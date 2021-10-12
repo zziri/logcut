@@ -1,15 +1,14 @@
 package com.zziri.logcut.job;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.regex.Pattern;
 
 @Component
+@Slf4j
 public class CutJob extends Job {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public int getNumberOfOptions() {
@@ -26,7 +25,7 @@ public class CutJob extends Job {
         Pattern startPattern = Pattern.compile(options.get(0));
         Pattern endPattern = Pattern.compile(options.get(1));
 
-        logger.info(String.format("cutting by pattern from %s to %s", startPattern.toString(), endPattern.toString()));
+        log.info(String.format("cutting by pattern from %s to %s", startPattern.toString(), endPattern.toString()));
 
         int startIndex = getMatchIndex(lines, 0, startPattern);
         int endIndex = getMatchIndex(lines, startIndex+1, endPattern);
