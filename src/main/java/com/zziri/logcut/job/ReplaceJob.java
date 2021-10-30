@@ -5,23 +5,26 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class PrefixJob extends Job {
+public class ReplaceJob extends Job {
     @Override
     public int getNumberOfOptions() {
-        return 1;
+        return 2;
     }
 
     @Override
     public String getName() {
-        return "prefix";
+        return "replace";
     }
 
     @Override
     public List<String> run(List<String> lines) {
-        String prefix = options.poll();
+        String src = options.poll();
+        String dst = options.poll();
+
         for (int i=0; i<lines.size(); i++) {
-            lines.set(i, prefix + lines.get(i));
+            lines.set(i, lines.get(i).replaceAll(src, dst));
         }
+
         return lines;
     }
 }
