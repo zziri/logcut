@@ -22,8 +22,8 @@ public class CutJob extends Job {
 
     @Override
     public List<String> run(List<String> lines) {
-        Pattern startPattern = Pattern.compile(options.get(0));
-        Pattern endPattern = Pattern.compile(options.get(1));
+        Pattern startPattern = Pattern.compile(options.poll());
+        Pattern endPattern = Pattern.compile(options.poll());
 
         log.info(String.format("cutting by pattern from %s to %s", startPattern.toString(), endPattern.toString()));
 

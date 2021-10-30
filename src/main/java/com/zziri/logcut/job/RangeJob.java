@@ -23,8 +23,8 @@ public class RangeJob extends Job {
 
     @Override
     public List<String> run(List<String> lines) {
-        String low = options.get(0);
-        String high = options.get(1);
+        String low = options.poll();
+        String high = options.poll();
 
         if (low.compareTo(high) > 0) {
             log.error("Please check the order of parameters");

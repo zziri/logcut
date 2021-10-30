@@ -25,7 +25,7 @@ public class InputJob extends Job {
     public List<String> run(List<String> lines) {
         List<String> ret = new ArrayList<>();
         try {
-            ret = Files.readAllLines(Paths.get(options.get(0)).toAbsolutePath(), StandardCharsets.ISO_8859_1);
+            ret = Files.readAllLines(Paths.get(options.poll()).toAbsolutePath(), StandardCharsets.ISO_8859_1);
         } catch (IOException e) {
             e.printStackTrace();
         }

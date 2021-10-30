@@ -23,7 +23,7 @@ public class OutputJob extends Job {
     @Override
     public List<String> run(List<String> lines) {
         try {
-            Files.write(Paths.get(options.get(0)).toAbsolutePath(), lines, StandardCharsets.ISO_8859_1);
+            Files.write(Paths.get(options.poll()).toAbsolutePath(), lines, StandardCharsets.ISO_8859_1);
         } catch (IOException e) {
             e.printStackTrace();
         }
